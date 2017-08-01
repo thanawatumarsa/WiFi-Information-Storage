@@ -3,8 +3,8 @@
     <div class="page-header">
       <h2>Access Point Lists</h2>
     </div>
-    <add-form :addAP = "addAP" :newInfo = "newInfo"></add-form>
-    <access-point-lists :wifiInfo = "wifiInfo" :editInfo = "editInfo" :edit = "editWifi" :remove = "removeAP" :temp = "tempEdit"></access-point-lists>
+    <add-form :addAP = "addAP" :newInfo = "newInfo" :editInfo = "editInfo" :editChk = "editChk" :editWifi = "editWifi" :clearEdit = "clearEdit" :saveEdit = "saveEdit"></add-form>
+    <access-point-lists :wifiInfo = "wifiInfo" :editInfo = "editInfo" :edit = "editWifi" :remove = "removeAP"></access-point-lists>
   </div>
 </template>
 
@@ -46,7 +46,9 @@ export default {
         location: '',
         model: ''
       },
-      tempEdit: 0
+      editData: {},
+      tempEdit: 0,
+      editChk: true
     }
   },
   components: {
@@ -61,11 +63,29 @@ export default {
       this.newInfo.location = ''
       this.newInfo.model = ''
     },
-    editWifi: function (wifi) {
-      console.log(wifi)
-      this.tempEdit = wifi
+    editWifi: function (dex, wifi) {
+      this.editChk = false
+      this.editInfo.apname = this.wifiInfo[dex].apname
+      this.editInfo.ssid = this.wifiInfo[dex].ssid
+      this.editInfo.location = this.wifiInfo[dex].location
+      this.editInfo.model = this.wifiInfo[dex].model
+      this.tempEdit = dex
+      this.editData = wifi
+    },
+    saveEdit: function () {
+      wifiInfoRef.child(this.editData['.key']).update(this.editInfo)
+      this.clearEdit ()
+    },
+    clearEdit: function () {
+      this.editInfo.apname = ''
+      this.editInfo.ssid = ''
+      this.editInfo.location = ''
+      this.editInfo.model = ''
+      this.editChk = true
+      this.tempEdit = 0
     },
     removeAP: function (wifi) {
+
       wifiInfoRef.child(wifi['.key']).remove()
     }
   }

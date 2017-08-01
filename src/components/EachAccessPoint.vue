@@ -17,7 +17,7 @@
         {{wifi.model}}
       </td>
       <td>
-        <input type="submit" class="btn btn-primary" value="Edit" v-on:click="edit(index)">
+        <input type="submit" class="btn btn-primary" value="Edit" v-on:click="edit(index, wifi)">
       </td>
       <td>
         <input type="submit" class="btn btn-primary" value="Delete" v-on:click="remove(wifi)">
@@ -31,7 +31,7 @@
 import EditAccessPoint from '../components/EditAccessPoint'
 
 export default {
-  props: ['wifiInfo', 'editInfo', 'edit', 'remove', 'temp'],
+  props: ['wifiInfo', 'editInfo', 'edit', 'remove'],
   components: {
     EditAccessPoint
   }
