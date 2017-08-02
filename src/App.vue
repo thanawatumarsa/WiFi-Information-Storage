@@ -36,15 +36,15 @@ export default {
     return {
       newInfo: {
         apname: '',
-        ssid: '',
-        location: '',
-        model: ''
+        serial: '',
+        mac: '',
+        ip: ''
       },
       editInfo: {
         apname: '',
-        ssid: '',
-        location: '',
-        model: ''
+        serial: '',
+        mac: '',
+        ip: ''
       },
       editData: {},
       tempEdit: 0,
@@ -59,16 +59,16 @@ export default {
     addAP: function () {
       wifiInfoRef.push(this.newInfo)
       this.newInfo.apname = ''
-      this.newInfo.ssid = ''
-      this.newInfo.location = ''
-      this.newInfo.model = ''
+      this.newInfo.serial = ''
+      this.newInfo.mac = ''
+      this.newInfo.ip = ''
     },
     editWifi: function (dex, wifi) {
       this.editChk = false
       this.editInfo.apname = this.wifiInfo[dex].apname
-      this.editInfo.ssid = this.wifiInfo[dex].ssid
-      this.editInfo.location = this.wifiInfo[dex].location
-      this.editInfo.model = this.wifiInfo[dex].model
+      this.editInfo.serial = this.wifiInfo[dex].serial
+      this.editInfo.mac = this.wifiInfo[dex].mac
+      this.editInfo.ip = this.wifiInfo[dex].ip
       this.tempEdit = dex
       this.editData = wifi
     },
@@ -78,9 +78,9 @@ export default {
     },
     clearEdit: function () {
       this.editInfo.apname = ''
-      this.editInfo.ssid = ''
-      this.editInfo.location = ''
-      this.editInfo.model = ''
+      this.editInfo.serial = ''
+      this.editInfo.mac = ''
+      this.editInfo.ip = ''
       this.editChk = true
       this.tempEdit = 0
     },

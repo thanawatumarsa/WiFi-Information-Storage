@@ -14,17 +14,17 @@
         </th>
         <th>
           <center>
-          SSID
+          S/N
           </center>
         </th>
         <th>
           <center>
-          Location
+          MAC Address
           </center>
         </th>
         <th>
           <center>
-          Model
+          IP Address
           </center>
         </th>
         <th>

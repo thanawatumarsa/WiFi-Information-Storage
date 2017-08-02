@@ -4,13 +4,13 @@
       <input type="text" id="name" class="form-control" placeholder="AP Name" v-model="newInfo.apname">
     </div>
     <div class="form-group">
-      <input type="text" id="phone" class="form-control" placeholder="SSID" v-model="newInfo.ssid">
+      <input type="text" id="phone" class="form-control" placeholder="Serial" v-model="newInfo.serial">
     </div>
     <div class="form-group">
-      <input type="text" id="email" class="form-control" placeholder="Location" v-model="newInfo.location">
+      <input type="text" id="email" class="form-control" placeholder="MAC" v-model="newInfo.mac">
     </div>
     <div class="form-group">
-      <input type="text" id="email" class="form-control" placeholder="Model" v-model="newInfo.model">
+      <input type="text" id="email" class="form-control" placeholder="IP" v-model="newInfo.ip">
     </div>
     <input :disabled="newInfo.apname == '' || newInfo.ssid == '' || newInfo.location == '' || newInfo.model == ''"type="submit" class="btn btn-default" value="+ Add">
   </form>
@@ -19,15 +19,15 @@
       <input type="text" id="name" class="form-control" placeholder="AP Name" v-model="editInfo.apname">
     </div>
     <div class="form-group">
-      <input type="text" id="phone" class="form-control" placeholder="SSID" v-model="editInfo.ssid">
+      <input type="text" id="phone" class="form-control" placeholder="Serial" v-model="editInfo.serial">
     </div>
     <div class="form-group">
-      <input type="text" id="email" class="form-control" placeholder="Location" v-model="editInfo.location">
+      <input type="text" id="email" class="form-control" placeholder="MAC" v-model="editInfo.mac">
     </div>
     <div class="form-group">
-      <input type="text" id="email" class="form-control" placeholder="Model" v-model="editInfo.model">
+      <input type="text" id="email" class="form-control" placeholder="IP" v-model="editInfo.ip">
     </div>
-    <input  @click="saveEdit" :disabled="editInfo.apname == '' || editInfo.ssid == '' || editInfo.location == '' || editInfo.model == ''"type="submit" class="btn btn-default" value="Save">
+    <input  @click="saveEdit" :disabled="editInfo.apname == '' || editInfo.serial == '' || editInfo.mac == '' || editInfo.ip == ''"type="submit" class="btn btn-default" value="Save">
     <input @click="clearEdit" type="submit" class="btn btn-default" value="cancel">
   </form>
 </template>

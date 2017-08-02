@@ -8,13 +8,13 @@
         {{wifi.apname}}
       </td>
       <td>
-        {{wifi.ssid}}
+        {{wifi.serial}}
       </td>
       <td>
-        {{wifi.location}}
+        {{wifi.mac}}
       </td>
       <td>
-        {{wifi.model}}
+        {{wifi.ip}}
       </td>
       <td>
         <input type="submit" class="btn btn-primary" value="Edit" v-on:click="edit(index, wifi)">
