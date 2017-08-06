@@ -1,12 +1,13 @@
 <template>
   <div id="app" class="container">
     <div class="page-header">
-      <h2>Access Point Lists</h2>
+      <h1>Access Point Lists</h1>
     </div>
     <add-form :addAP = "addAP" :newInfo = "newInfo" :editInfo = "editInfo" :editChk = "editChk" :editWifi = "editWifi" :clearEdit = "clearEdit" :saveEdit = "saveEdit"
-     :locationsChk = "locationsChk" :APlo = "APlo" :editLocations = "editLocations" :editlo = "editlo" :clearLo = "clearLo"></add-form>
+     :locationsChk = "locationsChk" :APlo = "APlo" :addLocations = "addLocations" :editLocations = "editLocations" :clearLo = "clearLo" :APloData="APloData"></add-form>
     <hr>
-    <access-point-lists :wifiInfo = "wifiInfo" :editInfo = "editInfo" :edit = "editWifi" :remove = "removeAP" :editLocations = "editLocations"></access-point-lists>
+    <access-point-lists :wifiInfo = "wifiInfo" :editInfo = "editInfo" :edit = "editWifi" :remove = "removeAP" :editLocations = "editLocations"
+     :locationsChk = "locationsChk" :APloData = "APloData" :LoTemp = "LoTemp" :removeLo="removeLo"></access-point-lists>
   </div>
 </template>
 
@@ -41,19 +42,21 @@ export default {
         serial: '',
         mac: '',
         ip: '',
+        locations: ''
       },
       editInfo: {
         apname: '',
         serial: '',
         mac: '',
         ip: '',
+        locations: ''
       },
       APlo: {
         location: '',
         dbm: ''
       },
       APloData: {},
-      APloData2: {},
+      LoTemp: 0,
       editData: {},
       locationDex: 0,
       tempEdit: 0,
@@ -75,28 +78,30 @@ export default {
     },
     editWifi: function (dex, wifi) {
       this.editChk = false
+      this.locationsChk = false
       this.editInfo.apname = this.wifiInfo[dex].apname
       this.editInfo.serial = this.wifiInfo[dex].serial
       this.editInfo.mac = this.wifiInfo[dex].mac
       this.editInfo.ip = this.wifiInfo[dex].ip
+      this.editInfo.locations = this.wifiInfo[dex].locations
       this.tempEdit = dex
       this.editData = wifi
-    },
-    editLocations: function (dex, wifi) {
-      this.editChk = false
-      this.locationsChk = true
-      this.locationDex = dex
-      this.APloData2 = wifi
-      this.APloData = wifi
-      this.APloData.push{locations: 'test'}
-    },
-    editlo: function () {
-      console.log(this.APlo);
-      wifiInfoRef.child(this.APloData2['.key']).push(this.APlo)
     },
     saveEdit: function () {
       wifiInfoRef.child(this.editData['.key']).update(this.editInfo)
       this.clearEdit ()
+    },
+    addLocations: function () {
+      wifiInfoRef.child(this.APloData['.key']).child('locations').push(this.APlo)
+      this.APlo.location = ''
+      this.APlo.dbm = ''
+    },
+    editLocations: function (dex, wifi) {
+      this.editChk = false
+      this.locationsChk = true
+      this.APloData = wifi
+      this.LoTemp = wifiInfoRef.child(this.APloData['.key'])
+      console.log(this.LoTemp);
     },
     clearEdit: function () {
       this.editInfo.apname = ''
@@ -109,10 +114,15 @@ export default {
     clearLo: function () {
       this.APlo.location = ''
       this.APlo.dbm = ''
+      this.locationsChk = false
+      this.editChk = true
     },
     removeAP: function (wifi) {
-
       wifiInfoRef.child(wifi['.key']).remove()
+    },
+    removeLo: function (wifi, dex) {
+      console.log(dex);
+      wifiInfoRef.child(wifi['.key']).child('locations').child(dex).remove()
     }
   }
 }

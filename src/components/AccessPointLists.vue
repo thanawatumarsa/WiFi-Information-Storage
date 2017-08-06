@@ -1,5 +1,6 @@
 <template lang="html">
   <table class="table table">
+  <!-- <table v-if="!locationsChk" class="table table"> -->
     <thead>
       <tr>
         <th>
@@ -29,28 +30,60 @@
         </th>
         <th>
           <center>
-          Edit
+          Locations
           </center>
         </th>
         <th>
           <center>
-          Delete
+          dBm
+          </center>
+        </th>
+        <th>
+        </th>
+        <th>
+          <center>
+            Options
+          </center>
+        </th>
+        <th>
+          <center>
+            Delete
           </center>
         </th>
       </tr>
     </thead>
-    <each-access-point :wifiInfo="wifiInfo" :editInfo = "editInfo" :edit = "edit" :remove="remove" :editLocations = "editLocations"></each-access-point>
+    <each-access-point :wifiInfo="wifiInfo" :editInfo = "editInfo" :edit = "edit" :remove="remove" :editLocations = "editLocations"
+     :APloData="APloData" :LoTemp = "LoTemp" :locationsChk="locationsChk" :removeLo="removeLo"></each-access-point>
   </table>
+  <!-- <table v-else-if="locationsChk === true" class="table table">
+    <thead>
+      <tr>
+        <th>
+          <center>
+          Location
+        </center>
+        </th>
+        <th>
+          <center>
+          dBm
+          </center>
+        </th>
+      </tr>
+    </thead>
+    <each-location :wifiInfo="wifiInfo" :APloData="APloData" :LoTemp = "LoTemp"></each-location>
+  </table> -->
 </template>
 
 <script>
 
 import EachAccessPoint from '../components/EachAccessPoint'
+import EachLocation from '../components/EachLocation'
 
 export default {
-  props: ['wifiInfo', 'editInfo', 'edit', 'remove', 'editLocations'],
+  props: ['wifiInfo', 'editInfo', 'edit', 'remove', 'editLocations', 'locationsChk', 'APloData', 'LoTemp', 'removeLo'],
   components: {
-    EachAccessPoint
+    EachAccessPoint,
+    EachLocation
   }
 }
 </script>
