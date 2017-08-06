@@ -5,7 +5,7 @@
         {{index + 1}}
       </td>
       <td>
-        {{wifi.apname}}
+        <a @click="editLocations(index, wifi)">{{wifi.apname}}</a>
       </td>
       <td>
         {{wifi.serial}}
@@ -31,7 +31,7 @@
 import EditAccessPoint from '../components/EditAccessPoint'
 
 export default {
-  props: ['wifiInfo', 'editInfo', 'edit', 'remove'],
+  props: ['wifiInfo', 'editInfo', 'edit', 'remove' , 'editLocations'],
   components: {
     EditAccessPoint
   }

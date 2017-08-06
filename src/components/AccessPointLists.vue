@@ -39,7 +39,7 @@
         </th>
       </tr>
     </thead>
-    <each-access-point :wifiInfo="wifiInfo" :editInfo = "editInfo" :edit = "edit" :remove="remove"></each-access-point>
+    <each-access-point :wifiInfo="wifiInfo" :editInfo = "editInfo" :edit = "edit" :remove="remove" :editLocations = "editLocations"></each-access-point>
   </table>
 </template>
 
@@ -48,7 +48,7 @@
 import EachAccessPoint from '../components/EachAccessPoint'
 
 export default {
-  props: ['wifiInfo', 'editInfo', 'edit', 'remove'],
+  props: ['wifiInfo', 'editInfo', 'edit', 'remove', 'editLocations'],
   components: {
     EachAccessPoint
   }

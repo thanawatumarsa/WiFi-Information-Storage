@@ -3,8 +3,10 @@
     <div class="page-header">
       <h2>Access Point Lists</h2>
     </div>
-    <add-form :addAP = "addAP" :newInfo = "newInfo" :editInfo = "editInfo" :editChk = "editChk" :editWifi = "editWifi" :clearEdit = "clearEdit" :saveEdit = "saveEdit"></add-form>
-    <access-point-lists :wifiInfo = "wifiInfo" :editInfo = "editInfo" :edit = "editWifi" :remove = "removeAP"></access-point-lists>
+    <add-form :addAP = "addAP" :newInfo = "newInfo" :editInfo = "editInfo" :editChk = "editChk" :editWifi = "editWifi" :clearEdit = "clearEdit" :saveEdit = "saveEdit"
+     :locationsChk = "locationsChk" :APlo = "APlo" :editLocations = "editLocations" :editlo = "editlo" :clearLo = "clearLo"></add-form>
+    <hr>
+    <access-point-lists :wifiInfo = "wifiInfo" :editInfo = "editInfo" :edit = "editWifi" :remove = "removeAP" :editLocations = "editLocations"></access-point-lists>
   </div>
 </template>
 
@@ -38,17 +40,25 @@ export default {
         apname: '',
         serial: '',
         mac: '',
-        ip: ''
+        ip: '',
       },
       editInfo: {
         apname: '',
         serial: '',
         mac: '',
-        ip: ''
+        ip: '',
       },
+      APlo: {
+        location: '',
+        dbm: ''
+      },
+      APloData: {},
+      APloData2: {},
       editData: {},
+      locationDex: 0,
       tempEdit: 0,
-      editChk: true
+      editChk: true,
+      locationsChk: false
     }
   },
   components: {
@@ -72,6 +82,18 @@ export default {
       this.tempEdit = dex
       this.editData = wifi
     },
+    editLocations: function (dex, wifi) {
+      this.editChk = false
+      this.locationsChk = true
+      this.locationDex = dex
+      this.APloData2 = wifi
+      this.APloData = wifi
+      this.APloData.push{locations: 'test'}
+    },
+    editlo: function () {
+      console.log(this.APlo);
+      wifiInfoRef.child(this.APloData2['.key']).push(this.APlo)
+    },
     saveEdit: function () {
       wifiInfoRef.child(this.editData['.key']).update(this.editInfo)
       this.clearEdit ()
@@ -83,6 +105,10 @@ export default {
       this.editInfo.ip = ''
       this.editChk = true
       this.tempEdit = 0
+    },
+    clearLo: function () {
+      this.APlo.location = ''
+      this.APlo.dbm = ''
     },
     removeAP: function (wifi) {
 
